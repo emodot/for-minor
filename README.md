@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Valentine Memory Vault 💖
 
-## Getting Started
+A private, emotion-first web application for storing memories, "Open When" messages, music, and a special Valentine reveal.
 
-First, run the development server:
+## 🚀 Quick Start
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Prerequisites
+
+- Node.js 18+ installed
+- Supabase account with project created
+
+### Setup
+
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+2. **Configure Supabase**
+   - The `.env.local` file is already configured with your Supabase credentials
+   - Run the SQL schema in `supabase-schema.sql` in your Supabase SQL Editor
+   - Create two storage buckets in Supabase Dashboard > Storage:
+     - `photos` (private)
+     - `voice-notes` (private)
+
+3. **Create a user**
+   - Go to Supabase Dashboard > Authentication > Users
+   - Create a new user manually (email/password)
+   - This is the only user who can log in (no signup UI)
+
+4. **Add your songs**
+   - Edit `data/songs.ts` and add your songs to the three sections:
+     - Songs That Feel Like You
+     - Songs That Feel Like Us
+     - Songs For Our Future
+   - Each song needs: `id`, `title`, `artist`, `albumArt` (URL), and `note`
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   - Navigate to `http://localhost:3000`
+
+## 📁 Project Structure
+
+```
+app/
+├── page.tsx              # Landing page
+├── login/               # Login page
+├── home/                # Home navigation
+├── memories/            # Memory vault
+│   ├── photos/          # Photo grid
+│   ├── voice-notes/     # Audio players
+│   └── letters/         # Letter reading
+├── open-when/           # Locked messages
+├── music/               # Spotify visualizer
+└── final/               # Valentine reveal
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗄️ Database Schema
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The app uses three tables:
+- `profiles` - User profile information
+- `memories` - Photos, voice notes, and letters
+- `open_when` - Time-locked messages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+See `supabase-schema.sql` for the exact schema.
 
-## Learn More
+## 🎨 Features
 
-To learn more about Next.js, take a look at the following resources:
+- **Authentication**: Login-only (no signup)
+- **Memory Vault**: Store and view photos, voice notes, and letters
+- **Open When**: Date-locked messages that unlock on specific dates
+- **Music Visualizer**: Display songs with emotional notes and animations
+- **Final Reveal**: Cinematic Valentine proposal page with confetti
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Supabase (Auth, Database, Storage)
+- Canvas Confetti
 
-## Deploy on Vercel
+## 📱 Mobile-First
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The entire app is designed mobile-first and works beautifully on:
+- Mobile Safari (iOS)
+- Chrome Mobile (Android)
+- Desktop browsers
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔒 Security
+
+- All routes except `/login` and `/` are protected
+- Middleware handles authentication
+- Storage buckets are private
+- No signup UI (user created manually in Supabase)
+
+## 🚢 Deployment
+
+Deploy to Vercel:
+
+1. Push your code to GitHub
+2. Import project in Vercel
+3. Add environment variables:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+4. Deploy!
+
+## 📝 Notes
+
+- Songs are stored in `data/songs.ts` - edit this file to add your music
+- Open When messages unlock based on the `unlock_date` field
+- Confetti triggers once per unlocked message (tracked in localStorage)
+- All images from Supabase Storage are automatically allowed
+
+## 💝 Enjoy!
+
+This is built with love and emotion-first design. Every interaction is crafted to feel special.
