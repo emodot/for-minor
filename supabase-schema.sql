@@ -25,6 +25,11 @@ create table open_when (
   created_at timestamp default now()
 );
 
+-- RLS: allow authenticated users to read memories (single-user app)
+alter table memories enable row level security (RLS);
+create policy "Authenticated users can read memories"
+  on memories for select to authenticated using (true);
+
 -- Storage buckets (create these in Supabase Dashboard > Storage)
--- Bucket: photos (private)
--- Bucket: voice-notes (private)
+-- Bucket: photos (public recommended so file_url works as-is)
+-- Bucket: voice-notes (public recommended)

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Memory Vault",
+  title: "For Minor",
   description: "A private space for memories",
 };
 

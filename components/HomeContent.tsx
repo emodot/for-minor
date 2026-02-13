@@ -2,12 +2,13 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Heart, Lock, Music } from 'lucide-react'
+import { Heart, Lock, Music, Upload } from 'lucide-react'
 
 const iconMap = {
   heart: Heart,
   lock: Lock,
   music: Music,
+  upload: Upload,
 } as const
 
 export type NavCardIcon = keyof typeof iconMap
@@ -49,6 +50,13 @@ const navCards: NavCard[] = [
     icon: 'heart',
     color: 'from-red-500 to-pink-500',
   },
+  {
+    title: 'Upload memories',
+    description: 'Add photos, voice notes, letters',
+    href: '/upload',
+    icon: 'upload',
+    color: 'from-zinc-600 to-zinc-700',
+  },
 ]
 
 export default function HomeContent() {
@@ -69,7 +77,7 @@ export default function HomeContent() {
           </p>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {navCards.map((card, index) => {
             const Icon = iconMap[card.icon]
             return (
