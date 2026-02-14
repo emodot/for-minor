@@ -41,7 +41,7 @@ export default function NavBar() {
               href="/home"
               className="text-lg font-light text-zinc-900 dark:text-zinc-50"
             >
-              Memory Vault
+              For Minor
             </Link>
           )}
         </div>

@@ -45,7 +45,7 @@ export default function MemoriesContent() {
           className="mb-12 text-center"
         >
           <h1 className="mb-2 text-3xl font-light text-zinc-900 dark:text-zinc-50 sm:text-4xl">
-            Memory Vault
+            For Minor
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400">
             Choose a category to explore
